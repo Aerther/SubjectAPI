@@ -1,5 +1,7 @@
 package com.example.subject_api.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.subject_api.model.Question;
+import com.example.subject_api.response.ResponseHandler;
 import com.example.subject_api.service.SubjectService;
 
 @RestController
@@ -20,15 +23,17 @@ public class QuestionController {
 		this.subjectService = subjectService;
 	}
 	
-	@GetMapping("{questionId}")
-	public Question getQuestion(@PathVariable String questionId) {
-		return this.subjectService.getQuestion(questionId);
+	@GetMapping("/{questionId}")
+	public ResponseEntity<Object> getQuestion(@PathVariable("questionId") String questionId) {
+		Question question = this.subjectService.getQuestion(questionId);
+		
+		return ResponseHandler.responseBuilder("Given Question details", HttpStatus.OK, question);
 	}
 	
 	@PostMapping
-	public String createQuestion(@RequestBody Question question) {
+	public ResponseEntity<Object> createQuestion(@RequestBody Question question) {
 		this.subjectService.createQuestion(question);
 		
-		return "Question Saved!";
+		return ResponseHandler.responseBuilder("Requested Question Saved", HttpStatus.CREATED);
 	}
 }

@@ -1,9 +1,12 @@
 package com.example.subject_api.service;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.subject_api.exception.NotFoundException;
 import com.example.subject_api.model.Question;
 import com.example.subject_api.model.Subject;
 import com.example.subject_api.repository.QuestionRepository;
@@ -29,6 +32,10 @@ public class SubjectServiceImpl implements SubjectService {
 
 	@Override
 	public String createQuestion(Question question) {
+		if(this.subjectRepository.findById(question.getSubject().getId()).isEmpty()) {
+			throw new NotFoundException("Request Subject ID does not exist");
+		}
+		
 		this.questionRepository.save(question);
 		
 		return "Question Saved!";
@@ -36,6 +43,10 @@ public class SubjectServiceImpl implements SubjectService {
 
 	@Override
 	public String updateSubject(Subject subject) {
+		if(this.subjectRepository.findById(subject.getId()).isEmpty()) {
+			throw new NotFoundException("Request Subject does not exist");
+		}
+		
 		this.subjectRepository.save(subject);
 		
 		return "Subject Updated!";
@@ -43,6 +54,10 @@ public class SubjectServiceImpl implements SubjectService {
 
 	@Override
 	public String updateQuestion(Question question) {
+		if(this.questionRepository.findById(question.getId()).isEmpty()) {
+			throw new NotFoundException("Request Question does not exist");
+		}
+		
 		this.questionRepository.save(question);
 		
 		return "Question Updated!";
@@ -66,16 +81,28 @@ public class SubjectServiceImpl implements SubjectService {
 
 	@Override
 	public Subject getSubject(String id) {
+		if(this.subjectRepository.findById(id).isEmpty()) {
+			throw new NotFoundException("Request Subject does not exist");
+		}
+		
 		return this.subjectRepository.findById(id).get();
 	}
 
 	@Override
 	public Question getQuestion(String id) {
+		if(this.questionRepository.findById(id).isEmpty()) {
+			throw new NotFoundException("Request Question does not exist");
+		}
+		
 		return this.questionRepository.findById(id).get();
 	}
 
 	@Override
 	public List<Question> getSubjectQuestion(String subjectId) {
+		if(this.subjectRepository.findById(subjectId).isEmpty()) {
+			throw new NotFoundException("Request Subject does not exist");
+		}
+		
 		return this.questionRepository.findBySubjectId(subjectId);
 	}
 
@@ -83,5 +110,4 @@ public class SubjectServiceImpl implements SubjectService {
 	public List<Subject> getAllSubjects() {
 		return this.subjectRepository.findAll();
 	}
-
 }
