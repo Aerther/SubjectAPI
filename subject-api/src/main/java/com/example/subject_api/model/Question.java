@@ -26,6 +26,14 @@ public class Question {
 	
 	public Question() {}
 	
+	public Question(String id, String question, List<String> answers, int answer, Subject subject) {
+		this.id = id;
+		this.question = question;
+		this.answers = answers;
+		this.answer = answer;
+		this.subject = subject;
+	}
+	
 	// Getters and Setters
 	
 	public String getId() {

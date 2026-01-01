@@ -1,9 +1,7 @@
 package com.example.subject_api.service;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.subject_api.exception.NotFoundException;
@@ -27,7 +25,7 @@ public class SubjectServiceImpl implements SubjectService {
 	public String createSubject(Subject subject) {
 		this.subjectRepository.save(subject);
 		
-		return "Subject Saved!";
+		return "sucess";
 	}
 
 	@Override
@@ -38,7 +36,7 @@ public class SubjectServiceImpl implements SubjectService {
 		
 		this.questionRepository.save(question);
 		
-		return "Question Saved!";
+		return "sucess";
 	}
 
 	@Override
@@ -49,7 +47,7 @@ public class SubjectServiceImpl implements SubjectService {
 		
 		this.subjectRepository.save(subject);
 		
-		return "Subject Updated!";
+		return "sucess";
 	}
 
 	@Override
@@ -60,7 +58,7 @@ public class SubjectServiceImpl implements SubjectService {
 		
 		this.questionRepository.save(question);
 		
-		return "Question Updated!";
+		return "sucess";
 	}
 
 	@Override
@@ -69,14 +67,14 @@ public class SubjectServiceImpl implements SubjectService {
 	
 		this.subjectRepository.deleteById(id);
 		
-		return "Subject Deleted!";
+		return "sucess";
 	}
 
 	@Override
 	public String deleteQuestion(String id) {
 		this.questionRepository.deleteById(id);
 		
-		return "Question Deleted!";
+		return "sucess";
 	}
 
 	@Override

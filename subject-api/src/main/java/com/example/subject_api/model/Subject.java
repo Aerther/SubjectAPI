@@ -14,6 +14,11 @@ public class Subject {
 	
 	public Subject() {}
 	
+	public Subject(String id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+	
 	// Getters and Setters
 	
 	public String getId() {

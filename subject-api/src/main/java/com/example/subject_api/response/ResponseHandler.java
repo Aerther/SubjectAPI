@@ -1,7 +1,6 @@
 package com.example.subject_api.response;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,7 @@ public class ResponseHandler {
 		Map<String, Object> response = new HashMap<>();
 		
 		response.put("message", message);
-		response.put("HttpStatus", httpStatus);
+		response.put("status", httpStatus.value());
 		response.put("data", object);
 		response.put("date", LocalDateTime.now());
 		
@@ -32,7 +31,7 @@ public class ResponseHandler {
 		Map<String, Object> response = new HashMap<>();
 			
 		response.put("message", message);
-		response.put("HttpStatus", httpStatus);
+		response.put("status", httpStatus.value());
 		response.put("date", LocalDateTime.now());
 			
 		return new ResponseEntity<>(response, httpStatus);
@@ -46,7 +45,7 @@ public class ResponseHandler {
 		Map<String, Object> response = new HashMap<>();
 		
 		response.put("message", message);
-		response.put("HttpStatus", httpStatus);
+		response.put("status", httpStatus.value());
 		response.put("data", objects);
 		response.put("date", LocalDateTime.now());
 			
